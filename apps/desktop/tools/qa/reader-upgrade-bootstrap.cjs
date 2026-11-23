@@ -23,20 +23,23 @@ module.exports = function install(base, stage) {
       const check = (name, value) => { assert.ok(value, name); checks.push(name); };
       try {
         await new Promise(resolve => setTimeout(resolve, 150));
-        if (stage === 'seed') await e('sessionManagerApp.chooseCodexFolder()');
+        if (stage !== 'upgraded') {
+          await e('void (window.threadleafApp ??= window.sessionManagerApp)');
+        }
+        if (stage === 'seed') await e('threadleafApp.chooseCodexFolder()');
         for (let n = 0; n < 100; n++) {
-          if (await e('sessionManagerApp.getState().folder?.entries?.length===1')) break;
+          if (await e('threadleafApp.getState().folder?.entries?.length===1')) break;
           await new Promise(resolve => setTimeout(resolve, 50));
         }
-        check('saved source opens with one synthetic session', await e('sessionManagerApp.getState().folder?.entries?.length===1'));
+        check('saved source opens with one synthetic session', await e('threadleafApp.getState().folder?.entries?.length===1'));
         check('no repeated source chooser', chooserCalls === (stage === 'seed' ? 1 : 0));
-        await e('sessionManagerApp.openCodexCatalogEntry(sessionManagerApp.getState().folder.entries[0].entryId)');
+        await e('threadleafApp.openCodexCatalogEntry(threadleafApp.getState().folder.entries[0].entryId)');
         if (stage === 'seed') {
           await e("readerShell.setPreference('font','xxxxlarge');readerShell.setPreference('theme','dark');readerShell.setPreference('width','wide');document.getElementById('readerFavorite').click()");
         }
         check('26px font survives restart/replacement', await e("getComputedStyle(document.getElementById('readMount')).fontSize==='26px'"));
         check('theme and width survive restart/replacement', await e("document.documentElement.dataset.theme==='dark'&&document.documentElement.dataset.width==='wide'"));
-        check('favorite survives restart/replacement', await e('sessionManagerApp.getSelectedFavorite()'));
+        check('favorite survives restart/replacement', await e('threadleafApp.getSelectedFavorite()'));
         check('prompt and final reply remain readable', await e("document.getElementById('readMount').textContent.includes('Synthetic final reply')&&document.querySelectorAll('.read-section').length===2"));
         const saved = await e('JSON.stringify(Object.entries(localStorage).sort(([a],[b])=>a.localeCompare(b)))');
         const baseline = path.join(base, 'saved-settings.json');

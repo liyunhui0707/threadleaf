@@ -41,7 +41,7 @@ function rollout(id, stamp = '2026-09-01T10-00-00') {
 }
 
 async function tempRoot(t) {
-  const created = await fs.mkdtemp(path.join(os.tmpdir(), 'asm-catalog-'));
+  const created = await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-catalog-'));
   const root = await fs.realpath(created);
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   return root;

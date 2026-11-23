@@ -11,7 +11,7 @@ const mainRequire = createRequire(path.join(appRoot, 'main.js'));
 
 test('production choose, automatic sync and full-text search exclude reviews and subagents', async t => {
   const fsp = require('node:fs/promises');
-  const root = await fsp.realpath(await fsp.mkdtemp(path.join(require('node:os').tmpdir(), 'asm-main-origin-')));
+  const root = await fsp.realpath(await fsp.mkdtemp(path.join(require('node:os').tmpdir(), 'threadleaf-main-origin-')));
   t.after(() => fsp.rm(root, { recursive: true, force: true }));
   const active = path.join(root, 'sessions/2026/11/04'); await fsp.mkdir(active, { recursive: true });
   const ids = ['11111111-1111-4111-8111-111111111111', '22222222-2222-4222-8222-222222222222',

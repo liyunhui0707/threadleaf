@@ -43,7 +43,7 @@ async function main() {
     } finally { clearInterval(timer); await reader.close(); }
     return;
   }
-  const root = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'asm-append-measure-'))), results = [];
+  const root = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'threadleaf-append-measure-'))), results = [];
   for (const mib of [64, 256, 1024]) {
     const target = path.join(root, `rollout-${mib}.jsonl`), fd = fs.openSync(target, 'wx', 0o600);
     let size = 0;

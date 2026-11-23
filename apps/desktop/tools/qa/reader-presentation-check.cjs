@@ -18,7 +18,7 @@ module.exports = async function ({ base, win, check, e, dialog }) {
   const hash = () => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
   const before = hash();
   dialog.showOpenDialog = async () => ({ canceled: false, filePaths: [file] });
-  await e('sessionManagerApp.chooseCodexFile()');
+  await e('threadleafApp.chooseCodexFile()');
   check('tool-question cards are hidden while final replies remain visible', await e("document.querySelectorAll('.question-reply').length===0 && !document.getElementById('readMount').textContent.includes('阅读器应该采用') && document.getElementById('readMount').textContent.includes('收到。保留安静')"));
   check('untrusted outside image references produce path-free cards without image loads', await e("document.querySelectorAll('.attachment-card').length===1 && document.querySelectorAll('.attachment-card img').length===0 && !document.getElementById('readMount').textContent.includes('never-read-synthetic')"));
   check('image CSP permits only object URLs', await e("document.querySelector('meta[http-equiv=\"Content-Security-Policy\"]').content.includes('img-src blob:;')"));
@@ -45,7 +45,7 @@ module.exports = async function ({ base, win, check, e, dialog }) {
   await e("document.querySelector('.attachment-close').click()");
   check('closing preview releases object URL and removes pixels', await e("window.__revokedImages.length===1 && !document.querySelector('.attachment-preview img')"));
   await e('selectSyntheticImage()');
-  await e('sessionManagerApp.reloadCodexFile()');
+  await e('threadleafApp.reloadCodexFile()');
   check('reloading conversation releases preview and does not persist image selection', await e("window.__revokedImages.length===2 && !document.querySelector('.attachment-preview img')"));
   await e("document.querySelector('.read-shell').scrollTop=0");
   fs.writeFileSync(base + '/presentation-questions-light.png', (await win.webContents.capturePage()).toPNG());

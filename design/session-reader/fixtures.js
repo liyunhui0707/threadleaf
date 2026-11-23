@@ -2,7 +2,7 @@
 window.prototypeFixtures = [
   {
     id: 'reader', title: '设计一个安静的阅读器', provider: 'Codex', date: '今天', time: '10:42', favorite: true,
-    preview: '让内容成为主角，让界面退后一步。', project: 'Session Manager',
+    preview: '让内容成为主角，让界面退后一步。', project: 'Threadleaf',
     messages: [
       { role: 'user', time: '10:28', html: '<p>我想做一个能回看对话的桌面阅读器。它应该安静、简洁，但要有完整产品的质感。</p><p>先帮我确定阅读界面的方向。</p>' },
       { role: 'assistant', time: '10:29', html: '<h2>从阅读本身出发</h2><p>打开一段对话时，最重要的不是知道系统做了多少工作，而是能立刻接上自己的思路。</p><ul><li><strong>清楚的层级：</strong>会话、问题、回答，一眼就能分清。</li><li><strong>稳定的阅读区域：</strong>长文本有合适的行宽，代码和表格有自己的空间。</li><li><strong>克制的操作：</strong>搜索、收藏随手可用，其余工具在需要时出现。</li></ul><blockquote>让内容成为主角，让界面退后一步。</blockquote>' },

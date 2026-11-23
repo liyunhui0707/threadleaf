@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  verify-session-manager:
+  verify-threadleaf:
     # Pin Intel while hosted macOS ARM64 capacity prevents jobs from starting.
     # ARM64 packaged-app validation remains a separate local delivery check.
     runs-on: macos-15-intel

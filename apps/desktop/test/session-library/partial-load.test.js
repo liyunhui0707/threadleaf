@@ -9,7 +9,7 @@ const crypto = require('node:crypto');
 const { loadSessionLibrary, MAX_SESSION_BYTES } = require('../../lib/session-library');
 
 async function fixture(t) {
-  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'asm-partial-load-')));
+  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-partial-load-')));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   for (const agent of ['codex', 'claude-code']) {
     await fs.mkdir(path.join(root, agent));

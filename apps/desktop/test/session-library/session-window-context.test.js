@@ -10,7 +10,7 @@ const { createWindowRouter } = require('../../lib/session-windows');
 const { createLibrarySettings } = require('../../lib/session-library-settings');
 
 test('production window contexts keep catalog, reader and search capabilities private', async t => {
-  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'asm-windows-')));
+  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-windows-')));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   const dir = path.join(root, 'sessions/2026/11/01'); await fs.mkdir(dir, { recursive: true });
   const id = 'aaaaaaaa-aaaa-4aaa-8aaa-000000000001';

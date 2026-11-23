@@ -1,4 +1,4 @@
-// Standalone session-manager refresh IPC handler.
+// Threadleaf refresh IPC handler.
 // Thin wrapper around the S1 importers at apps/desktop/tools/session-import/
 // (which are .mjs). Importers are loaded via dynamic import() on first use
 // in production; in tests they're injected through register(ipc, {importers}).

@@ -16,7 +16,7 @@ const question = answer => '<send_user_message_question_reply>' + JSON.stringify
   { question: 'HIDDEN-QUESTION', answer, questionItemId: 'HIDDEN-ID' },
 ]) + '</send_user_message_question_reply>';
 async function setup(t, raw, compressed = false) {
-  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'asm-question-filter-')));
+  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-question-filter-')));
   const filePath = path.join(root, 'rollout-synthetic.jsonl' + (compressed ? '.zst' : ''));
   await fs.writeFile(filePath, compressed ? zstdCompressSync(raw) : raw);
   const reader = createConversationReader();

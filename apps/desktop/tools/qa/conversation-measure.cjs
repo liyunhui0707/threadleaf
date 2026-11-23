@@ -52,7 +52,7 @@ async function main() {
     return;
   }
   assert.equal(Number(process.versions.node.split('.')[0]),24);
-  const root=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'asm-conversation-measure-'))),results=[];
+  const root=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'threadleaf-conversation-measure-'))),results=[];
   const run=args=>{const r=spawnSync(process.execPath,[__filename,...args],{encoding:'utf8',timeout:180000,maxBuffer:65536});if(r.status!==0||r.error||r.signal)throw Error('Synthetic worker failed: '+r.stderr.slice(-1500));return r.stdout;};
   async function fingerprint(file) {const s=fs.statSync(file,{bigint:true}),h=createHash('sha256');for await(const b of fs.createReadStream(file))h.update(b);return JSON.stringify([String(s.mode),String(s.size),String(s.mtimeNs),h.digest('hex')]);}
   for(const format of ['raw','zstd'])for(const size of [64,256,1024]) {

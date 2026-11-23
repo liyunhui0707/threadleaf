@@ -12,7 +12,7 @@ const ID = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa';
 const NAME = `rollout-2026-09-01T10-00-00-${ID}.jsonl`;
 
 async function fixture(t, body) {
-  const created = await fs.mkdtemp(path.join(os.tmpdir(), 'asm-folder-read-'));
+  const created = await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-folder-read-'));
   const root = await fs.realpath(created);
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   const directory = path.join(root, 'sessions', '2026', '09', '01');

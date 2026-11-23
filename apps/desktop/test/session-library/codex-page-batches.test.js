@@ -5,7 +5,7 @@ const { zstdCompressSync } = require('node:zlib');
 const { createZstdSession } = require('../../lib/codex-page-zstd-stream');
 const { textProjection } = require('../../lib/codex-page-text-projection');
 for (const compressed of [false, true]) test(`bounded record batches preserve offsets, unicode, malformed and unfinished records (${compressed})`, async t => {
-  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'asm-batches-')));
+  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-batches-')));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   const filePath = path.join(root, 'rollout-batches.jsonl' + (compressed ? '.zst' : ''));
   const row = text => JSON.stringify({ type: 'event_msg', payload: { type: 'user_message', message: text } }) + '\n';

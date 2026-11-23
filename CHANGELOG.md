@@ -1,5 +1,9 @@
 # 更新记录 / Changelog
 
+## 0.13.1
+
+- 统一阅读器、设计原型与工程工具的 Threadleaf 命名，保留旧版收藏与阅读设置的兼容性。
+
 ## 0.13.0
 
 - AI Session Manager 更名为 Threadleaf，采用叶片标识。旧版收藏、来源及阅读设置继续可用。

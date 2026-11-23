@@ -113,7 +113,7 @@ export async function scheduleSize(count, run, afterGeneration = async () => {})
 }
 
 export async function runSize(count, { run = runProcess } = {}) {
-  const workspace = await fs.mkdtemp(path.join(os.tmpdir(), 'asm-isolated-benchmark-'));
+  const workspace = await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-isolated-benchmark-'));
   const root = path.join(workspace, 'source');
   let before, result;
   try {

@@ -18,7 +18,7 @@ const OUTSIDE_NAME = `rollout-2026-09-01T10-00-00-${OUTSIDE_ID}.jsonl`;
 let helperPath;
 
 async function fixture(t) {
-  const created = await fs.mkdtemp(path.join(os.tmpdir(), 'asm-native-scan-'));
+  const created = await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-native-scan-'));
   const parent = await fs.realpath(created);
   t.after(() => fs.rm(parent, { recursive: true, force: true }));
   const root = path.join(parent, 'selected');
@@ -27,7 +27,7 @@ async function fixture(t) {
 }
 
 test.before(async () => {
-  const outputDirectory = await fs.mkdtemp(path.join(os.tmpdir(), 'asm-native-helper-'));
+  const outputDirectory = await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-native-helper-'));
   helperPath = path.join(outputDirectory, 'codex-source-helper-test');
   await execFileAsync(process.execPath, [
     path.join(__dirname, '..', '..', 'tools', 'build-codex-source-helper.mjs'),

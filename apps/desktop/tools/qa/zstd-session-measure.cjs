@@ -60,7 +60,7 @@ async function main() {
     return;
   }
   assert.equal(Number(process.versions.node.split('.')[0]), 24);
-  const root = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'asm-zstd-measure-')));
+  const root = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'threadleaf-zstd-measure-')));
   const run = args => {
     const r = spawnSync(process.execPath, [__filename, ...args], { encoding: 'utf8', timeout: 120000, maxBuffer: 65536 });
     if (r.status !== 0 || r.error || r.signal) throw Error('Synthetic child failed: ' + r.stderr.slice(-1000));

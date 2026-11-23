@@ -9,7 +9,7 @@ const line = (text, role = 'user') => JSON.stringify({ type: 'response_item', pa
   type: 'message', role, content: [{ type: 'input_text', text }],
 } }) + '\n';
 async function fixture(t, content) {
-  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'asm-page-')));
+  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-page-')));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   const filePath = path.join(root, 'rollout-synthetic.jsonl');
   await fs.writeFile(filePath, content);

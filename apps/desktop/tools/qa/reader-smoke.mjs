@@ -17,7 +17,7 @@ const contents = path.join(app, 'Contents');
 const binary = path.join(contents, 'MacOS', 'Threadleaf');
 const asar = path.join(contents, 'Resources', 'app.asar');
 if (!app.endsWith('.app') || !fs.statSync(asar).isFile()) throw Error('Expected packaged app');
-const base = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'asm-reader-smoke-')));
+const base = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'threadleaf-reader-smoke-')));
 fs.chmodSync(base, 0o700);
 const root = path.join(base, 'source');
 const directory = path.join(root, 'sessions', '2026', '11', '01');

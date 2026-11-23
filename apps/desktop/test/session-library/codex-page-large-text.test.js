@@ -13,7 +13,7 @@ const message = (role, content) => JSON.stringify({ type: 'response_item', paylo
 } }) + '\n';
 const hash = text => createHash('sha256').update(text).digest('hex');
 async function setup(t, text, compressed) {
-  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'asm-large-text-')));
+  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-large-text-')));
   const filePath = path.join(root, 'rollout-invented.jsonl' + (compressed ? '.zst' : ''));
   await fs.writeFile(filePath, compressed ? zstdCompressSync(text) : text);
   const reader = createConversationReader();
