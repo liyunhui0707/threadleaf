@@ -19,7 +19,7 @@ test('whole-conversation search excludes tool-question replies and indexes image
   for (const query of ['Which direction', 'Calm reader', 'hiddenroutingneedle', 'hiddenpathneedle', 'questionItemId']) assert.equal((await reader.search(source, query)).matches.length, 0);
 });
 async function setup(t, compressed = false) {
-  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'asm-v2-')));
+  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-v2-')));
   const filePath = path.join(root, 'rollout-synthetic.jsonl' + (compressed ? '.zst' : ''));
   const text = Array.from({ length: 115 }, (_, n) => turn(n)).join('');
   await fs.writeFile(filePath, compressed ? zstdCompressSync(text) : text);

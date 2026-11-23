@@ -1,6 +1,6 @@
 {
   "name": "threadleaf",
-  "version": "0.13.0",
+  "version": "0.13.1",
   "productName": "Threadleaf",
   "description": "A local, read-only Codex conversation reader for macOS",
   "main": "main.js",

@@ -199,7 +199,7 @@ test('fresh workers do not inherit Node instrumentation or CI reporter options',
 
 test('fixture generator creates only requested synthetic files and refuses an existing root', async () => {
   const fixture = await import('../../tools/benchmark-codex-fixture.mjs');
-  const workspace = await fs.mkdtemp(path.join(os.tmpdir(), 'asm-benchmark-test-'));
+  const workspace = await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-benchmark-test-'));
   const root = path.join(workspace, 'source');
   try {
     assert.equal(await fixture.generateFixture(root, 100), 100);
@@ -213,7 +213,7 @@ test('fixture generator creates only requested synthetic files and refuses an ex
 
 test('external snapshot detects content, metadata, additions, removals and symlinks without following them', async () => {
   const fixture = await import('../../tools/benchmark-codex-fixture.mjs');
-  const workspace = await fs.mkdtemp(path.join(os.tmpdir(), 'asm-benchmark-snapshot-'));
+  const workspace = await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-benchmark-snapshot-'));
   try {
     const target = path.join(workspace, 'file');
     await fs.writeFile(target, 'synthetic');
@@ -280,7 +280,7 @@ test('real generator, fresh scan workers and cancellation preserve the synthetic
   skip: process.platform !== 'darwin' || process.versions.node.split('.')[0] !== '24',
 }, async () => {
   const fixture = await import('../../tools/benchmark-codex-fixture.mjs');
-  const workspace = await fs.mkdtemp(path.join(os.tmpdir(), 'asm-benchmark-integration-'));
+  const workspace = await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-benchmark-integration-'));
   const root = path.join(workspace, 'source');
   const pids = new Set([process.pid]);
   try {

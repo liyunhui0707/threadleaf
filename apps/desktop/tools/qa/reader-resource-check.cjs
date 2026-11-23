@@ -26,7 +26,7 @@ module.exports = async ({ base, e, check, dialog }) => {
       URL.revokeObjectURL=function(url){window.__resourceURLs.delete(url);return window.__revokeURL.call(URL,url);};void 0;`);
     const imageFile = path.join(base, 'automatic-images/rollout-images.jsonl');
     dialog.showOpenDialog = async () => ({ canceled: false, filePaths: [imageFile] });
-    await e('sessionManagerApp.chooseCodexFile()');
+    await e('threadleafApp.chooseCodexFile()');
     check('resource fixture image is readable', await until("document.querySelector('.attachment-preview img')?.naturalWidth===800"));
     let closed = true;
     for (let n = 0; n < 12; n++) {
@@ -51,10 +51,10 @@ module.exports = async ({ base, e, check, dialog }) => {
       for (const file of [raw, compressed]) {
         const before = await hash(file); peak = sample().totalBytes;
         dialog.showOpenDialog = async () => ({ canceled: false, filePaths: [file] });
-        let start = performance.now(); const opened = await e('sessionManagerApp.chooseCodexFile()'); const openMs = performance.now() - start;
+        let start = performance.now(); const opened = await e('threadleafApp.chooseCodexFile()'); const openMs = performance.now() - start;
         const latest = await e("document.getElementById('transcriptPageStatus').textContent.includes('已到最新') && document.getElementById('readMount').textContent.includes('resource needle')");
         start = performance.now(); await e("document.getElementById('transcriptPrevious').click()");
-        const moved = await until("!sessionManagerApp.isBusy() && !document.getElementById('transcriptNext').disabled", 2000); const previousMs = performance.now() - start;
+        const moved = await until("!threadleafApp.isBusy() && !document.getElementById('transcriptNext').disabled", 2000); const previousMs = performance.now() - start;
         start = performance.now(); await e("codexLive.search('resource needle','current')"); const searchMs = performance.now() - start;
         const hits = await e("document.querySelectorAll('.codex-search-hit').length");
         const readOnly = before === await hash(file);

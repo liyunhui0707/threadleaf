@@ -16,7 +16,7 @@ module.exports = async function ({ base, win, check, e, dialog }) {
   dialog.showOpenDialog = async () => ({ canceled: false, filePaths: [file] });
   win.setSize(1100,820);
   await e("document.documentElement.dataset.theme='light'");
-  await e('sessionManagerApp.chooseCodexFile()');
+  await e('threadleafApp.chooseCodexFile()');
   async function until(expression) {
     for (let n = 0; n < 100; n++) {
       if (await e(expression)) return true;
@@ -35,15 +35,15 @@ module.exports = async function ({ base, win, check, e, dialog }) {
   win.webContents.sendInputEvent({type:'keyDown',keyCode:'Escape'}); win.webContents.sendInputEvent({type:'keyUp',keyCode:'Escape'});
   check('Escape releases original pixels, closes the image and returns keyboard focus', await until("!document.querySelector('.image-lightbox') && !window.__enlargedImage.hasAttribute('src') && document.activeElement.textContent==='查看大图'"));
   fs.renameSync(image, path.join(root, 'removed.png'));
-  await e('sessionManagerApp.reloadCodexFile()');
+  await e('threadleafApp.reloadCodexFile()');
   check('a removed original has a useful missing-image state', await until("document.querySelector('.attachment-controls [role=status]').textContent.includes('原图已不存在') && !document.querySelector('.attachment-preview img')"));
   fs.renameSync(path.join(root, 'removed.png'), image);
-  await e('sessionManagerApp.reloadCodexFile()');
+  await e('threadleafApp.reloadCodexFile()');
   await until("document.querySelector('.attachment-preview img')?.naturalWidth===800");
   await e("document.documentElement.dataset.theme='dark';document.querySelector('.attachment-preview img').click()");
   await until("!!document.querySelector('.image-lightbox[open]')");
   fs.writeFileSync(base + '/automatic-image-dark.png', (await win.webContents.capturePage()).toPNG());
-  const reloaded = await e('sessionManagerApp.reloadCodexFile()');
+  const reloaded = await e('threadleafApp.reloadCodexFile()');
   check('reloading the conversation disposes the original-image modal', reloaded && await e("!document.querySelector('.image-lightbox')"));
   check('automatic image association preserves transcript and image bytes', hash(file) === sourceHash && hash(image) === imageHash);
   await require('./reader-native-images-check.cjs')({ base, win, check, e, dialog, image });

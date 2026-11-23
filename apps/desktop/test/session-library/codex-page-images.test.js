@@ -6,7 +6,7 @@ const { registerConversationImages } = require('../../lib/codex-page-images');
 const { createSessionSourceState } = require('../../lib/session-source-state');
 const PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a7s8AAAAASUVORK5CYII=', 'base64');
 async function fixture(t, thumbnail) {
-  const base = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'asm-image-test-')));
+  const base = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-image-test-')));
   const root = path.join(base, '.source'), temp = path.join(base, 'clipboard');
   await fs.mkdir(root); await fs.mkdir(temp);
   const filePath = path.join(root, 'rollout-test.jsonl');

@@ -29,7 +29,7 @@ function jsonl(records) {
 }
 
 async function fixture(t, records) {
-  const root = await fs.realpath(mkTempVault('asm-codex-pipeline-'));
+  const root = await fs.realpath(mkTempVault('threadleaf-codex-pipeline-'));
   t.after(() => cleanupTempVault(root));
   const sourceRoot = path.join(root, 'synthetic-codex/sessions');
   const day = path.join(sourceRoot, '2026/01/01');

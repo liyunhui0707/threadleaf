@@ -14,7 +14,7 @@ const reply = (text, phase = 'final_answer') => row('response_item', { type: 'me
 const complete = text => row('event_msg', { type: 'task_complete', ...(text ? { last_agent_message: text } : {}) });
 const initial = Array.from({ length: 120 }, (_, i) => prompt(`Question ${i}`) + reply(`Answer ${i}`) + complete(`Answer ${i}`)).join('');
 async function setup(t, raw = initial, compressed = false) {
-  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'asm-append-')));
+  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-append-')));
   const filePath = path.join(root, 'rollout-append.jsonl' + (compressed ? '.zst' : ''));
   await fs.writeFile(filePath, compressed ? zstdCompressSync(raw) : raw);
   const reader = createConversationReader();

@@ -10,7 +10,7 @@ const { createBrowsingScanner } = require('../../lib/codex-page-browsing-scan');
 const { createSessionSourceState } = require('../../lib/session-source-state');
 const ids = Array.from({ length: 6 }, (_, n) => `11111111-1111-4111-8111-${String(n).padStart(12, '0')}`);
 async function setup(t) {
-  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'asm-browsing-origin-')));
+  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-browsing-origin-')));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   const active = path.join(root, 'sessions/2026/11/04'); await fs.mkdir(active, { recursive: true });
   const payloads = [{ source: { subagent: { other: 'guardian' } } }, { source: { internal: 'guardian' } },

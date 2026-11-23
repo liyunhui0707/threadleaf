@@ -2,7 +2,7 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs/promises'),os=require('node:os'),path=require('node:path');
 const {createConversationReader}=require('../../lib/codex-page-reader-v2');
 test('paged search reaches all hits, reuses bounded results, and invalidates modified sources',async t=>{
- const root=await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(),'asm-search-pages-'))),file=path.join(root,'rollout-search.jsonl');
+ const root=await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(),'threadleaf-search-pages-'))),file=path.join(root,'rollout-search.jsonl');
  const row=i=>JSON.stringify({type:'event_msg',payload:{type:'user_message',message:`needle ${i}`}})+'\n';
  await fs.writeFile(file,Array.from({length:1250},(_,i)=>row(i)).join(''));
  const source={filePath:file,canonicalRoot:root,name:'Search'},reader=createConversationReader();
@@ -26,7 +26,7 @@ test('paged search reaches all hits, reuses bounded results, and invalidates mod
 });
 
 test('cached search validates source ancestry and explicit snapshots, and cancellation cannot repopulate a closed reader',async t=>{
- const root=await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(),'asm-search-validation-'))),file=path.join(root,'rollout-search.jsonl');
+ const root=await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(),'threadleaf-search-validation-'))),file=path.join(root,'rollout-search.jsonl');
  const row=JSON.stringify({type:'event_msg',payload:{type:'user_message',message:'needle'}})+'\n';
  await fs.writeFile(file,row);const reader=createConversationReader(),source={filePath:file,canonicalRoot:root};
  t.after(async()=>{await reader.close();await fs.rm(root,{recursive:true,force:true});});

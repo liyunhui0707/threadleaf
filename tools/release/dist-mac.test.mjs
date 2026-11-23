@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 
 const script = fileURLToPath(new URL('../../apps/desktop/tools/dist-mac.mjs', import.meta.url));
 function fixture(installFailure = false) {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'asm-dist-test-'));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'threadleaf-dist-test-'));
   for (const dir of ['tools', 'node_modules/electron', 'node_modules/electron-builder', 'dist']) {
     fs.mkdirSync(path.join(root, dir), { recursive: true });
   }

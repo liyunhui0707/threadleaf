@@ -4,7 +4,7 @@ const {createConversationReader}=require('../../lib/codex-page-reader-v2');
 const {zstdCompressSync}=require('node:zlib');
 const {readConversation}=require('../../lib/codex-page-reader-task');
 async function fixture(t){
- const root=await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(),'asm-seek-'))),file=path.join(root,'rollout-seek.jsonl');
+ const root=await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(),'threadleaf-seek-'))),file=path.join(root,'rollout-seek.jsonl');
  const row=(type,message)=>JSON.stringify({type:'event_msg',payload:{type,...(type==='user_message'?{message}:{last_agent_message:message})}})+'\n';
  const data=Array.from({length:20000},(_,i)=>row('user_message',`Question ${i}`)+row('task_complete',`Answer ${i}`)).join('');
  await fs.writeFile(file,data);const reader=createConversationReader();t.after(async()=>{await reader.close();await fs.rm(root,{recursive:true,force:true});});

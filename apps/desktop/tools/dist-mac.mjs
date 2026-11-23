@@ -37,7 +37,7 @@ if (result.status !== 0) process.exit(result.status ?? 1);
 // after failures for diagnosis; never remove arbitrary files as part of a build.
 const app = path.join(root, 'dist', process.arch === 'arm64' ? 'mac-arm64' : 'mac', `${pkg.productName}.app`);
 verifyMacBundle(app);
-const stage = fs.mkdtempSync(path.join(os.tmpdir(), 'asm-dmg-'));
+const stage = fs.mkdtempSync(path.join(os.tmpdir(), 'threadleaf-dmg-'));
 fs.chmodSync(stage, 0o700);
 const commands = [
   ['/usr/bin/ditto', [app, path.join(stage, `${pkg.productName}.app`)]],

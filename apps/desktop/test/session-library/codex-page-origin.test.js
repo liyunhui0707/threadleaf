@@ -65,7 +65,7 @@ test('only structured Guardian provenance identifies unnamed or renamed backgrou
 });
 
 for (const compressed of [false, true]) test(`bounded first-header classification, not transcript content (${compressed ? 'zstd' : 'raw'})`, async t => {
-  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'asm-origin-')));
+  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-origin-')));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   const filePath = path.join(root, 'rollout-synthetic.jsonl' + (compressed ? '.zst' : ''));
   const source = { filePath, canonicalRoot: root, sessionId: id };
@@ -89,7 +89,7 @@ for (const compressed of [false, true]) test(`bounded first-header classificatio
 });
 
 for (const compressed of [false, true]) test(`confirmed initialization-only sessions are hidden, uncertain and pending chats survive (${compressed})`, async t => {
-  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'asm-empty-origin-')));
+  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-empty-origin-')));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   const filePath = path.join(root, 'rollout-empty.jsonl' + (compressed ? '.zst' : ''));
   const source = { filePath, canonicalRoot: root, sessionId: id };
@@ -110,7 +110,7 @@ for (const compressed of [false, true]) test(`confirmed initialization-only sess
 });
 
 for (const compressed of [false, true]) test(`editor settings-only initialization is empty, then becomes visible on prompt (${compressed})`, async t => {
-  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'asm-editor-init-')));
+  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-editor-init-')));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   const filePath = path.join(root, 'rollout-editor.jsonl' + (compressed ? '.zst' : ''));
   const source = { filePath, canonicalRoot: root, sessionId: id };

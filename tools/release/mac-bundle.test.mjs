@@ -9,7 +9,7 @@ import { verifyMacBundle } from '../../apps/desktop/tools/verify-mac-bundle.mjs'
 test('bundle verification accepts a sealed app and rejects altered resources or a missing helper', {
   skip: process.platform !== 'darwin',
 }, () => {
-  const app = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'asm-sign-test-')), 'Synthetic.app');
+  const app = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'threadleaf-sign-test-')), 'Synthetic.app');
   fs.mkdirSync(path.join(app, 'Contents/MacOS'), { recursive: true });
   fs.mkdirSync(path.join(app, 'Contents/Resources/bin'), { recursive: true });
   fs.copyFileSync('/usr/bin/true', path.join(app, 'Contents/MacOS/reader'));

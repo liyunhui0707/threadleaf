@@ -8,7 +8,7 @@ const vm = require('node:vm');
 
 const source = fs.readFileSync(path.join(__dirname, '..', '..', 'preload.js'), 'utf8');
 
-test('preload exposes only narrow session-manager calls and passes only an opaque folder entry ID', async () => {
+test('preload exposes only narrow reader calls and passes only an opaque folder entry ID', async () => {
   const invocations = [];
   const exposed = {};
   const sandbox = {

@@ -49,7 +49,7 @@ test('fails closed for malformed settings and rejects relative paths', async (t)
 });
 
 test('remembers last selected source and Codex root without storing transcript content', async t => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'asm-source-settings-'));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'threadleaf-source-settings-'));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const settingsPath = path.join(root, 'settings.json');
   const first = createLibrarySettings({ settingsPath });
@@ -64,7 +64,7 @@ test('remembers last selected source and Codex root without storing transcript c
 });
 
 test('concurrent source preferences preserve both paths and the last choice', async t => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'asm-window-settings-'));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'threadleaf-window-settings-'));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const settings = createLibrarySettings({ settingsPath: path.join(root, 'settings.json') });
   await Promise.all([settings.setLibraryPath('/synthetic/library'), settings.setCodexPath('/synthetic/codex')]);

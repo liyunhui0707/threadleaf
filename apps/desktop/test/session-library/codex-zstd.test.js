@@ -11,7 +11,7 @@ const id = '11111111-1111-4111-8111-111111111111';
 const name = `rollout-2026-11-03T00-00-00-${id}.jsonl`;
 const record = i => JSON.stringify({ type: 'response_item', payload: { type: 'message', role: i % 2 ? 'assistant' : 'user', content: [{ type: 'input_text', text: `消息 ${i}\n\n**Markdown**` }] } }) + '\n';
 async function setup(t, content = Array.from({ length: 215 }, (_, i) => record(i)).join('')) {
-  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'asm-zstd-')));
+  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-zstd-')));
   const dir = path.join(root, 'sessions/2026/11/03');
   await fs.mkdir(dir, { recursive: true });
   const filePath = path.join(dir, name + '.zst');

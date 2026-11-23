@@ -58,7 +58,7 @@ window.addEventListener('DOMContentLoaded', () => {
       emptyState: byId('emptyState'),
     },
   });
-  window.sessionManagerApp = app;
+  window.threadleafApp = app;
   const live = window.SessionViewer.createCodexLive({ document, app, api: window.sessionApi,
     onOpen() { byId('searchDialog').close(); document.documentElement.dataset.find = 'open'; },
     elements: { root: byId('codexLive'), form: byId('codexSearchForm'), input: byId('codexSearchInput'),

@@ -13,7 +13,7 @@ const input = (text, image = url) => ({ type: 'response_item', payload: { type: 
 ] } });
 const final = { type: 'event_msg', payload: { type: 'task_complete', last_agent_message: 'final answer' } };
 async function fixture(t, compressed = false) {
-  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'asm-native-images-')));
+  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-native-images-')));
   const filePath = path.join(root, 'rollout-synthetic.jsonl' + (compressed ? '.zst' : ''));
   const reader = createConversationReader(), state = createSessionSourceState(() => true), handlers = new Map();
   registerConversationImages(state.guard({ handle: (name, fn) => handlers.set(name, fn) }), {

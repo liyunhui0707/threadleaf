@@ -21,7 +21,7 @@ module.exports = async ({ base, win, check, e, dialog, image }) => {
     const before = digest();
     dialog.showOpenDialog = async () => ({ canceled: false, filePaths: [file] });
     win.setSize(1100, 820); win.show(); win.focus();
-    await e('sessionManagerApp.chooseCodexFile()'); await pause(150);
+    await e('threadleafApp.chooseCodexFile()'); await pause(150);
     const up = !direction.endsWith('down');
     const point = await e(`(()=>{
       const r=document.querySelector('.read-shell'),c=document.querySelector('.attachment-controls');

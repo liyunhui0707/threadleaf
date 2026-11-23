@@ -23,7 +23,7 @@ svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.65;strok
 .app-window{height:calc(100dvh - 78px);min-height:500px;display:grid;grid-template-columns:276px minmax(0,1fr);border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--paper);box-shadow:var(--shadow)}
 .sidebar{min-height:0;display:flex;flex-direction:column;background:var(--sidebar);border-right:1px solid var(--line)}
 .brand{height:98px;display:flex;gap:12px;align-items:center;padding:20px 22px;font-size:15px;font-weight:650;letter-spacing:-.3px}
-.brand-mark{display:grid;place-items:center;width:36px;height:36px;border-radius:11px;background:var(--accent);color:var(--paper);font-size:28px;line-height:1;font-family:Georgia,serif}
+.brand-mark{width:36px;height:36px;display:block}
 .brand small{display:block;font-size:10px;font-weight:400;color:var(--muted);letter-spacing:.02em;margin-top:3px}
 .search-launch{display:flex;align-items:center;gap:10px;margin:0 16px 18px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--muted);font-size:12px;text-align:left}
 .search-launch svg{width:17px;height:17px}
@@ -215,7 +215,7 @@ dialog::backdrop{background:#12211938;backdrop-filter:blur(3px)}
 .prototype-footer>span{max-width:60%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .app-window{height:calc(100dvh - 62px);grid-template-columns:190px minmax(0,1fr);border-radius:10px}
 .brand{padding:15px 13px;height:80px;font-size:12px}
-.brand-mark{width:27px;height:27px;font-size:24px}
+.brand-mark{width:27px;height:27px}
 .brand small{display:none}
 .search-launch{margin:0 10px 14px;padding:8px;font-size:10px;gap:5px}
 .search-launch kbd{display:none}

@@ -6,7 +6,7 @@ const os = require('node:os');
 const path = require('node:path');
 const { createCodexPagedReader } = require('../../tools/legacy-reader/codex-paged-reader');
 async function setup(t) {
-  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'asm-paged-worker-')));
+  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-paged-worker-')));
   const filePath = path.join(root, 'rollout-example.jsonl');
   const lines = Array.from({ length: 215 }, (_, i) => JSON.stringify({ type: 'response_item', payload: {
     type: 'message', role: 'user', content: [{ type: 'input_text', text: `message ${i}` }],

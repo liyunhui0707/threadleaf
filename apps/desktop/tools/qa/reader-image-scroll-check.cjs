@@ -10,7 +10,7 @@ module.exports = async ({ base, win, check, e, dialog, image }) => {
   const before = digest();
   dialog.showOpenDialog = async () => ({ canceled: false, filePaths: [file] });
   win.show(); win.focus();
-  await e('sessionManagerApp.chooseCodexFile()');
+  await e('threadleafApp.chooseCodexFile()');
   await e("window.__imageReader=document.querySelector('.read-shell');window.__imageReader.scrollTop=0");
   const pause = () => new Promise(resolve => setTimeout(resolve, 150));
   async function until(code) {

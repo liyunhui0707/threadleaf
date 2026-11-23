@@ -24,12 +24,12 @@ module.exports = async function ({ base, win, check, e, dialog }) {
   const digest = () => JSON.stringify(files.map(p => { const s = fs.statSync(p); return [p,s.mode,s.size,s.mtimeMs,crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex')]; }));
   let before = digest();
   dialog.showOpenDialog = async () => ({ canceled: false, filePaths: [root] });
-  await e('sessionManagerApp.chooseCodexFolder()');
-  check('structured review excluded before bodies load', await e("sessionManagerApp.getState().folder.entries.length===2 && !document.getElementById('sessionList').textContent.includes('Guardian review')"));
+  await e('threadleafApp.chooseCodexFolder()');
+  check('structured review excluded before bodies load', await e("threadleafApp.getState().folder.entries.length===2 && !document.getElementById('sessionList').textContent.includes('Guardian review')"));
   check('review exclusion is explained', await e("document.getElementById('folderSourceNotice').textContent.includes('隐藏 1 个后台审核')"));
   for (let n = 0; n < 2; n++) {
-    const entry = await e(`sessionManagerApp.getState().folder.entries.find(x=>x.sessionId===${JSON.stringify(ids[n])}).entryId`);
-    await e(`sessionManagerApp.openCodexCatalogEntry(${JSON.stringify(entry)})`);
+    const entry = await e(`threadleafApp.getState().folder.entries.find(x=>x.sessionId===${JSON.stringify(ids[n])}).entryId`);
+    await e(`threadleafApp.openCodexCatalogEntry(${JSON.stringify(entry)})`);
     check(`oversized ${n === 1 ? 'zstd' : 'raw'} image and tool records preserve conversation text`, await e("document.getElementById('readMount').textContent.includes('Recovery final 1') && document.getElementById('readMount').textContent.includes('Recovery prompt 0') && document.querySelectorAll('.read-section').length===4"));
     check(`persistent omitted-content warning ${n}`, await e("!document.getElementById('transcriptReadWarning').hidden && document.getElementById('transcriptReadWarning').textContent.includes('0 条记录超出结构处理上限') && document.getElementById('transcriptReadWarning').textContent.includes('1 条格式损坏或未写完的记录') && !document.querySelector('.read-shell').contains(document.getElementById('transcriptReadWarning'))"));
   }
@@ -38,7 +38,7 @@ module.exports = async function ({ base, win, check, e, dialog }) {
   check('recovery reading and searching are read-only', digest() === before);
   fs.appendFileSync(index, JSON.stringify({ id: ids[2], thread_name: 'My renamed conversation' }) + '\n');
   before = digest(); await e('codexLive.tick()');
-  check('renaming a background review cannot turn it into a user conversation', await e("sessionManagerApp.getState().folder.entries.length===2 && !document.getElementById('sessionList').textContent.includes('My renamed conversation')"));
+  check('renaming a background review cannot turn it into a user conversation', await e("threadleafApp.getState().folder.entries.length===2 && !document.getElementById('sessionList').textContent.includes('My renamed conversation')"));
   check('rename polling is read-only', digest() === before);
   await e("document.querySelector('.source-menu').open=false; document.querySelector('.diagnostics-panel').open=false");
   fs.writeFileSync(base+'/recovery-900.png',(await win.webContents.capturePage()).toPNG());

@@ -60,7 +60,7 @@ async function main() {
     return;
   }
   if (Number(process.versions.node.split('.')[0]) !== 24) throw Error('Use Node 24');
-  const root = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'asm-long-measure-')));
+  const root = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'threadleaf-long-measure-')));
   const run = args => {
     const result = spawnSync(process.execPath, [__filename, ...args], { encoding: 'utf8', timeout: 60000, maxBuffer: 65536 });
     if (result.error || result.status !== 0 || result.signal) throw Error('Synthetic child failed');

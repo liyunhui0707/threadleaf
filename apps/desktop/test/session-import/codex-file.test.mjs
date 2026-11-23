@@ -9,7 +9,7 @@ const { loadCodexFile, MAX_CODEX_BYTES } = require('../../lib/codex-file');
 const record = JSON.stringify({ type: 'response_item', payload: { type: 'message', role: 'user', content: [{ type: 'input_text', text: 'Synthetic hello' }] } });
 
 async function fixture(t) {
-  const dir = await fs.mkdtemp('/private/tmp/asm-codex-file-');
+  const dir = await fs.mkdtemp('/private/tmp/threadleaf-codex-file-');
   t.after(() => fs.rm(dir, { recursive: true, force: true }));
   const file = path.join(dir, 'rollout-synthetic.jsonl');
   await fs.writeFile(file, record + '\n');

@@ -1,4 +1,4 @@
-# Session Manager 阅读器外观原型
+# Threadleaf 阅读器外观原型
 
 直接用 Safari 或 Chrome 打开同目录的 `index.html`。无需安装、构建或启动服务器。
 这是保留的设计基准，整体布局已迁入生产应用；此目录仍是独立原型，全部会话为虚构示例。

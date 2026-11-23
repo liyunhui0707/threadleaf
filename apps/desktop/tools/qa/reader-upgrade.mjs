@@ -14,7 +14,7 @@ const apps = process.argv.slice(2).map(p => fs.realpathSync(p));
 if (apps.length !== 2 || apps.some(p => !p.endsWith('.app'))) throw Error('Expected old and new app paths');
 const hash = p => crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const identity = apps.map(p => ({ asar: hash(path.join(p, 'Contents/Resources/app.asar')) }));
-const base = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'asm-reader-upgrade-')));
+const base = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'threadleaf-reader-upgrade-')));
 fs.chmodSync(base, 0o700);
 for (const dir of ['home/tmp', 'profile', 'source/sessions/2026/11/06', 'install']) fs.mkdirSync(path.join(base, dir), { recursive: true });
 const id = 'aaaaaaaa-bbbb-4ccc-8ddd-000000000001';

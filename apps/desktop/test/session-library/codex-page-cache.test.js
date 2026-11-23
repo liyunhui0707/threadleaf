@@ -11,7 +11,7 @@ const { readConversation } = require('../../lib/codex-page-reader-task');
 const text = Array.from({ length: 620 }, (_, n) => JSON.stringify({ type: 'event_msg',
   payload: { type: 'user_message', message: `Prompt ${n}` } }) + '\n').join('');
 async function setup(t, compressed) {
-  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'asm-page-cache-')));
+  const root = await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(), 'threadleaf-page-cache-')));
   const filePath = path.join(root, 'rollout-cache.jsonl' + (compressed ? '.zst' : ''));
   await fs.writeFile(filePath, compressed ? zstdCompressSync(text) : text);
   const reader = createConversationReader();

@@ -69,7 +69,7 @@ def main():
     old_dock = subprocess.check_output(['/usr/bin/defaults', 'export', 'com.apple.dock', '-'])
     (backup / 'dock.plist').write_bytes(old_dock)
     os.chmod(backup / 'dock.plist', 0o600)
-    staged = applications / ('.asm-install-' + stamp + '.app')
+    staged = applications / ('.threadleaf-install-' + stamp + '.app')
     subprocess.run(['/usr/bin/ditto', str(source), str(staged)], check=True)
     expected = manifest(source)
     if manifest(staged) != expected:

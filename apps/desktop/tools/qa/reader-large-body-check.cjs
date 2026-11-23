@@ -12,7 +12,7 @@ module.exports = async function ({ base, win, check, e, dialog }) {
   const digest = () => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
   const before = digest();
   dialog.showOpenDialog = async () => ({ canceled: false, filePaths: [file] });
-  await e('sessionManagerApp.chooseCodexFile()');
+  await e('threadleafApp.chooseCodexFile()');
   check('large reply opens at its final readable part without an omission warning', await e("document.getElementById('readMount').textContent.includes('FINAL-LARGE-NEEDLE') && document.getElementById('transcriptReadWarning').hidden && document.getElementById('transcriptNext').disabled"));
   check('long-message part label and Markdown final text are visible', await e("document.querySelector('.message-part-label').textContent.includes('长消息') && [...document.querySelectorAll('.assistant-turn strong')].some(n=>n.textContent==='FINAL-LARGE-NEEDLE')"));
   await navigate(e, 'previous');
@@ -26,7 +26,7 @@ module.exports = async function ({ base, win, check, e, dialog }) {
   await e("document.querySelector('.codex-search-hit').click()");
   let opened = false;
   for (let n = 0; n < 100; n++) {
-    opened = await e("!sessionManagerApp.isBusy() && document.getElementById('readMount').textContent.includes('FINAL-LARGE-NEEDLE') && !!document.querySelector('mark')");
+    opened = await e("!threadleafApp.isBusy() && document.getElementById('readMount').textContent.includes('FINAL-LARGE-NEEDLE') && !!document.querySelector('mark')");
     if (opened) break;
     await new Promise(resolve => setTimeout(resolve, 20));
   }

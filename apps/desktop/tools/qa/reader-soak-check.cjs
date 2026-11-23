@@ -28,7 +28,7 @@ module.exports = async ({ base, win, e: evaluate, check, dialog }) => {
       }
       await sleep(20);
     }
-    const state = await e(`JSON.stringify({busy:sessionManagerApp.isBusy(),images:document.querySelectorAll('.attachment-preview img').length,
+    const state = await e(`JSON.stringify({busy:threadleafApp.isBusy(),images:document.querySelectorAll('.attachment-preview img').length,
       modals:document.querySelectorAll('.image-lightbox[open]').length,hits:document.querySelectorAll('.codex-search-hit').length,
       visibility:document.visibilityState,focus:document.hasFocus(),
       dialogs:Array.from(document.querySelectorAll('dialog[open]'),n=>n.id||n.className),
@@ -47,14 +47,14 @@ module.exports = async ({ base, win, e: evaluate, check, dialog }) => {
       cycleNumber = cycle + 1;
       const at = Date.now();
       dialog.showOpenDialog = async () => ({ canceled: false, filePaths: [file] });
-      if (!await e('sessionManagerApp.chooseCodexFile()')) throw Error('Soak source did not open');
+      if (!await e('threadleafApp.chooseCodexFile()')) throw Error('Soak source did not open');
       await e("codexLive.search('needle','current')");
       await e("codexLive.search('needle','current')");
-      await until("!!document.querySelector('.codex-search-hit') && !sessionManagerApp.isBusy()", 'search results');
+      await until("!!document.querySelector('.codex-search-hit') && !threadleafApp.isBusy()", 'search results');
       await e("document.querySelector('.codex-search-hit').click()");
-      await until("document.getElementById('readMount').textContent.includes('Soak needle 0 ') && document.querySelectorAll('mark').length>0 && !sessionManagerApp.isBusy()", 'search-hit navigation');
+      await until("document.getElementById('readMount').textContent.includes('Soak needle 0 ') && document.querySelectorAll('mark').length>0 && !threadleafApp.isBusy()", 'search-hit navigation');
       dialog.showOpenDialog = async () => ({ canceled: false, filePaths: [imageFile] });
-      if (!await e('sessionManagerApp.chooseCodexFile()')) throw Error('Soak source did not open');
+      if (!await e('threadleafApp.chooseCodexFile()')) throw Error('Soak source did not open');
       await until("document.querySelector('.attachment-preview img')?.naturalWidth===800", 'image preview');
       await e("document.querySelector('.attachment-preview img').click()");
       await until("document.querySelector('.image-lightbox[open] img')?.naturalWidth===5120", 'image enlargement');
@@ -70,7 +70,7 @@ module.exports = async ({ base, win, e: evaluate, check, dialog }) => {
       await sleep(Math.max(0, 2000-(Date.now()-at)));
     }
     dialog.showOpenDialog = async () => ({ canceled: false, filePaths: [file] });
-    await e('sessionManagerApp.chooseCodexFile()');
+    await e('threadleafApp.chooseCodexFile()');
     urlsClosed = urlsClosed && await e('window.__soakURLs.size===0');
     const median = values => values.sort((a,b)=>a-b)[Math.floor(values.length/2)];
     const warm = median(samples.slice(30,60).map(x=>x.totalBytes)), end = median(samples.slice(-30).map(x=>x.totalBytes));

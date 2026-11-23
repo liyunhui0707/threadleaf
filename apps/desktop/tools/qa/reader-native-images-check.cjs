@@ -17,7 +17,7 @@ module.exports = async ({ base, win, check, e, dialog, image }) => {
   dialog.showOpenDialog = async () => ({ canceled: false, filePaths: [file] });
   win.setSize(1100, 820);
   await e("readerShell.setPreference('theme','light');document.documentElement.dataset.find='closed'");
-  await e('sessionManagerApp.chooseCodexFile()');
+  await e('threadleafApp.chooseCodexFile()');
   await e("document.querySelector('.attachment-card').scrollIntoView({block:'center'})");
   async function until(expression) {
     for (let i = 0; i < 100; i++) { if (await e(expression)) return true; await new Promise(r => setTimeout(r, 25)); }

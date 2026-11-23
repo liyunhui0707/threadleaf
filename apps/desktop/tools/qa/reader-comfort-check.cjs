@@ -24,17 +24,17 @@ module.exports = async function ({ base, win, check, e, dialog }) {
   fs.writeFileSync(name(emptyId), line('session_meta', { id: emptyId, source: 'vscode' }) + line('event_msg', { type: 'thread_settings_applied' }));
   let dialogs = 0;
   dialog.showOpenDialog = async () => { dialogs++; return { canceled: false, filePaths: [root] }; };
-  await e('sessionManagerApp.chooseCodexFolder()');
-  check('confirmed empty initialization is absent from the sidebar', await e('sessionManagerApp.getState().folder.entries.length===1'));
-  await e('sessionManagerApp.initialize()');
-  check('startup restores saved custom Codex source without a chooser', dialogs === 1 && await e('sessionManagerApp.getState().sourceMode==="folder" && sessionManagerApp.getState().folder.entries.length===1'));
-  await e('sessionManagerApp.openCodexCatalogEntry(sessionManagerApp.getState().folder.entries[0].entryId)');
+  await e('threadleafApp.chooseCodexFolder()');
+  check('confirmed empty initialization is absent from the sidebar', await e('threadleafApp.getState().folder.entries.length===1'));
+  await e('threadleafApp.initialize()');
+  check('startup restores saved custom Codex source without a chooser', dialogs === 1 && await e('threadleafApp.getState().sourceMode==="folder" && threadleafApp.getState().folder.entries.length===1'));
+  await e('threadleafApp.openCodexCatalogEntry(threadleafApp.getState().folder.entries[0].entryId)');
   const bottom = "Math.abs(document.querySelector('.read-shell').scrollHeight-document.querySelector('.read-shell').clientHeight-document.querySelector('.read-shell').scrollTop)<2";
   check('opening a conversation still lands at the latest bottom', await e(bottom));
   check('header displays metadata cwd and repeated source/footer labels are hidden', await e(`document.getElementById('readerMeta').textContent===${JSON.stringify(cwd)} && document.getElementById('currentSourceChip').hidden && !document.getElementById('readerPosition').textContent`));
   async function move(id) {
     await e(`document.getElementById(${JSON.stringify(id)}).click()`);
-    for (let i=0;i<400;i++) { if (await e('!sessionManagerApp.isBusy()')) return; await new Promise(r=>setTimeout(r,20)); }
+    for (let i=0;i<400;i++) { if (await e('!threadleafApp.isBusy()')) return; await new Promise(r=>setTimeout(r,20)); }
     throw Error('Navigation did not complete');
   }
   await move('transcriptPrevious'); check('earlier page lands at its bottom', await e(bottom));
@@ -58,6 +58,6 @@ module.exports = async function ({ base, win, check, e, dialog }) {
   await e("document.dispatchEvent(new KeyboardEvent('keydown',{key:'0',metaKey:true,bubbles:true}));readerShell.setPreference('width','comfortable')");
   check('reset restores standard 16px font', await e("getComputedStyle(document.getElementById('readMount')).fontSize==='16px'"));
   fs.appendFileSync(name(emptyId), line('event_msg', { type: 'user_message', message: 'A new prompt without final answer' }));
-  await e('sessionManagerApp.rescanCodexFolder()');
-  check('a formerly empty session reappears when a pending prompt arrives', await e('sessionManagerApp.getState().folder.entries.length===2'));
+  await e('threadleafApp.rescanCodexFolder()');
+  check('a formerly empty session reappears when a pending prompt arrives', await e('threadleafApp.getState().folder.entries.length===2'));
 };

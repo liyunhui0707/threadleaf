@@ -33,11 +33,11 @@ module.exports = function install(app) {
       for (let n = 0; n < 200 && !probe.entered; n++) await new Promise(r => setTimeout(r, 10));
       check('background scan is held at the source-switch boundary', probe.entered);
       dialog.showOpenDialog = async () => ({ canceled: false, filePaths: [newRoot] });
-      const opened = await e('sessionManagerApp.chooseCodexFolder()');
+      const opened = await e('threadleafApp.chooseCodexFolder()');
       check('source switch interrupts background scan and succeeds on the first click', opened && probe.aborted);
       await new Promise(r => setTimeout(r, 50));
       check('late poll cannot restore previous source and source bytes stay unchanged',
-        await e(`sessionManagerApp.getState().folder.entries[0].sessionId===${JSON.stringify(id)}`) && fs.readFileSync(file, 'utf8') === text);
+        await e(`threadleafApp.getState().folder.entries[0].sessionId===${JSON.stringify(id)}`) && fs.readFileSync(file, 'utf8') === text);
     } finally { probe?.release?.(); probe = null; }
   };
 };

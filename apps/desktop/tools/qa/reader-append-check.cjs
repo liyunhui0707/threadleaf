@@ -16,13 +16,13 @@ module.exports = function install(app) {
     const unchanged = () => assert.equal(fs.readFileSync(file, 'utf8'), expected);
     const append = text => { unchanged(); fs.appendFileSync(file, text); expected += text; };
     dialog.showOpenDialog = async () => ({ canceled: false, filePaths: [file] });
-    assert.ok(await e('sessionManagerApp.chooseCodexFile()'));
+    assert.ok(await e('threadleafApp.chooseCodexFile()'));
     await e('codexLive.tick()');
     const reader = readers.find(reader => reader.getSource()?.filePath === file);
     assert.ok(reader);
     append(turn(115)); await e('codexLive.tick()');
     check('automatic update parses only appended records and follows latest', reader.getReadWork().incremental &&
-      reader.getReadWork().parsedRecords === 2 && await e("document.getElementById('readMount').textContent.includes('Synthetic append final 115') && sessionManagerApp.isFollowingLatest()"));
+      reader.getReadWork().parsedRecords === 2 && await e("document.getElementById('readMount').textContent.includes('Synthetic append final 115') && threadleafApp.isFollowingLatest()"));
     await navigate(e, 'previous'); await e("document.querySelector('.read-shell').scrollTop=140");
     const before = await e("({text:document.getElementById('readMount').textContent,top:document.querySelector('.read-shell').scrollTop})");
     append(turn(116)); await e('codexLive.tick()');
